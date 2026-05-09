@@ -83,7 +83,7 @@ a:hover {
 
 <h1>WW villages management</h1>
 
-<form method="post" action="../Admin/admin.php?action=addWWVillages">
+<form method="post" action="admin.php?action=addWWVillages">
 <table id="show_artefacts">
 <thead>
 <tr>
@@ -110,10 +110,11 @@ a:hover {
 </tr>
 </tbody>
 </table>
+</form>
 
 <h1>Artifacts management</h1>
 
-<form method="post" action="../Admin/admin.php?action=addArtifacts">
+<form method="post" action="admin.php?action=addArtifacts">
 <table id="show_artefacts">
 <thead>
 <tr>

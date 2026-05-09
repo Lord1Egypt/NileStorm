@@ -1,4 +1,5 @@
 <?php
+ob_start();
 #################################################################################
 ##                                                                             ##
 ##              -= YOU MUST NOT REMOVE OR CHANGE THIS NOTICE =-                ##
@@ -598,7 +599,7 @@ if (!empty($_GET['p'])) {
 							{
 								if($_POST || $_GET)
 								{
-									if($_GET['p'] and $_GET['p']!="search")
+									if(isset($_GET['p']) && $_GET['p'] and $_GET['p']!="search")
 									{
 										$filename = 'Templates/'.$_GET['p'].'.tpl';
 										if(file_exists($filename)) include($filename);

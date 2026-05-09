@@ -1423,7 +1423,11 @@ public function getBestOasisCropBonus($x, $y) {
 	    
 	    //Count each kid in its own array, to check how many villages must be created
 	    foreach($villageArrays as $village){
-	        if($village['wid'] == 0) $countedWids[$village['mode']][$village['kid']]++;
+	        if($village['wid'] == 0) {
+	            if(!isset($countedWids[$village['mode']])) $countedWids[$village['mode']] = [];
+	            if(!isset($countedWids[$village['mode']][$village['kid']])) $countedWids[$village['mode']][$village['kid']] = 0;
+	            $countedWids[$village['mode']][$village['kid']]++;
+	        }
 	    }
 	    
 	    //Generate the number of desired village for each kid
@@ -1431,6 +1435,7 @@ public function getBestOasisCropBonus($x, $y) {
 	    foreach($countedWids as $mode => $totalCount){
 	        foreach($totalCount as $sector => $count){
 	            $generatedWids = $this->generateBase($sector, $mode, $count);
+	            if(!isset($wids[$mode])) $wids[$mode] = [];
 	            $wids[$mode] = array_merge((array)$wids[$mode], !is_array($generatedWids) ? [$generatedWids] : $generatedWids);
 	            if(empty($i[$mode])) $i[$mode] = 0;
 	        }
@@ -3018,7 +3023,8 @@ public function getBestOasisCropBonus($x, $y) {
 
 	function getAllianceName($id, $use_cache = true) {
         // return from cache
-        return $this->getAlliance($id, $use_cache)['tag'];
+        $alliance = $this->getAlliance($id, $use_cache);
+        return ($alliance && isset($alliance['tag'])) ? $alliance['tag'] : '[?]';
 	}
 
 	// no need to cache this method
