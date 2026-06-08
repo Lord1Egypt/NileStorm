@@ -5,7 +5,7 @@
 ##                                                                             ##
 ## --------------------------------------------------------------------------- ##
 ##                                                                             ##
-##  Project:       TravianZ                                                    ##
+##  Project:       NileStorm                                                    ##
 ##  Version:       28.04.2026                                                  ##
 ##  Filename:      agb.php                                                     ##
 ##  Developed by:  ZZJHONS                                                     ##

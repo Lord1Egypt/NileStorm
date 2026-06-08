@@ -2,7 +2,7 @@
 #################################################################################
 ##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
 ## --------------------------------------------------------------------------- ##
-##  Project:       TravianZ                                                    ##
+##  Project:       NileStorm                                                    ##
 ##  Filename       Math.php                                                    ##
 ##  Developed by:  martinambrus                                                ##
 ##  License:       TravianZ Project                                            ##

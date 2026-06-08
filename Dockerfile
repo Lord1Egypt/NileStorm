@@ -20,21 +20,21 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     pdo_mysql \
     zip
 
-# Enable Apache modules
-RUN a2enmod rewrite headers
+# Enable Apache modules and allow .htaccess overrides
+RUN a2enmod rewrite headers \
+    && sed -i 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf
 
-# Set working directory
 WORKDIR /var/www/html
 
-# Runtime source code is bind-mounted by docker-compose.
-# Keep only minimal folder bootstrap inside the image.
-RUN mkdir -p /var/www/html/var
+# Copy application code (excludes files in .dockerignore)
+COPY . /var/www/html/
 
-# Configure Apache to use /var/www/html as DocumentRoot
-RUN sed -i 's!/var/www/html!/var/www/html!g' /etc/apache2/sites-available/000-default.conf
+# Create runtime-writable directories and set permissions
+RUN mkdir -p var/log var/db GameEngine/Prevention GameEngine/Notes \
+    && chown -R www-data:www-data /var/www/html \
+    && chmod -R 755 /var/www/html \
+    && chmod -R 775 var/ GameEngine/Prevention GameEngine/Notes
 
-# Expose Apache port
 EXPOSE 80
 
-# Start Apache
 CMD ["apache2-foreground"]

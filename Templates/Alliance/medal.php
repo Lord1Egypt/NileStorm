@@ -2,7 +2,7 @@
 #################################################################################
 ## -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                              ##
 ## --------------------------------------------------------------------------- ##
-## Project:     TravianZ (Incremental Refactor SAFE)                           ##
+## Project:     NileStorm (Incremental Refactor SAFE)                           ##
 ## File:        medal.php                                                      ##
 ## Fixes:                                                                       ##
 ##  - FIX broken tooltip (escaping JS/HTML)                                    ##

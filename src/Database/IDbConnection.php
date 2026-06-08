@@ -2,7 +2,7 @@
 #################################################################################
 ##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
 ## --------------------------------------------------------------------------- ##
-##  Project:       TravianZ                                                    ##
+##  Project:       NileStorm                                                    ##
 ##  Filename       IDbConnection.php                                           ##
 ##  Developed by:  martinambrus                                                ##
 ##  License:       TravianZ Project                                            ##

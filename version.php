@@ -5,7 +5,7 @@ $start_timer = $generator->pageLoadTimeStart();
 #################################################################################
 ##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
 ## --------------------------------------------------------------------------- ##
-##  Project:       TravianZ                                                    ##
+##  Project:       NileStorm                                                    ##
 ##  Filename       version.php                                                 ##
 ##  Developed by:  Shadow                                                      ##
 ##  License:       TravianZ Project                                            ##
@@ -172,7 +172,7 @@ echo '<div class="developer-card" style="
     flex-wrap: nowrap;
 ">
 
-    <!-- TravianZ Team -->
+    <!-- NileStorm Team -->
     <a href="#" style="text-decoration:none; flex:1;">
         <div style="
             background: linear-gradient(135deg, #fff3e6, #ffe6ff);

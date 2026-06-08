@@ -2,7 +2,7 @@
 #################################################################################
 ##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
 ## --------------------------------------------------------------------------- ##
-##  Project:       TravianZ                                                    ##
+##  Project:       NileStorm                                                    ##
 ##  Filename       karte2.php                                                  ##
 ##  Developed by:  Dzoki                                                       ##
 ##  License:       TravianZ Project                                            ##

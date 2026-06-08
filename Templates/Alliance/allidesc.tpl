@@ -2,7 +2,7 @@
 #################################################################################
 ## -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                              ##
 ## --------------------------------------------------------------------------- ##
-## Project:     TravianZ (Refactor incremental)                                ##
+## Project:     NileStorm (Refactor incremental)                                ##
 ## File:        allidesc.tpl                                                   ##
 ## Description: Alliance description + medals + edit form                      ##
 ## Improvements:                                                               ##

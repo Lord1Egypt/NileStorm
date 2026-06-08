@@ -5,7 +5,7 @@
 ##                                                                             ##
 ## --------------------------------------------------------------------------- ##
 ##                                                                             ##
-##  Project:       TravianZ                                                    ##
+##  Project:       NileStorm                                                    ##
 ##  Version:       2011.11.06                                                  ##
 ##  Filename:      Templates/Travian/3.6/Tutorial/1.tpl                        ##
 ##  Edited by:     ZZJHONS                                                     ##

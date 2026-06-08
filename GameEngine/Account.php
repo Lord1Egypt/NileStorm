@@ -4,7 +4,7 @@ use App\Entity\User;
 #################################################################################
 ##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
 ## --------------------------------------------------------------------------- ##
-##  Project:       TravianZ                                                    ##
+##  Project:       NileStorm                                                    ##
 ##  Version:       22.06.2015                    			       ##
 ##  Filename       Account.php                                                 ##
 ##  Developed by:  Mr.php , Advocaite , brainiacX , yi12345 , Shadow , ronix   ##
@@ -161,8 +161,8 @@ class Account {
             );
 
             if ($uid) {
-                setcookie("COOKUSR",   $_POST['name'],  time() + COOKIE_EXPIRE, COOKIE_PATH);
-                setcookie("COOKEMAIL", $_POST['email'], time() + COOKIE_EXPIRE, COOKIE_PATH);
+                setcookie("COOKUSR",   $_POST["name"],  time() + COOKIE_EXPIRE, COOKIE_PATH, "", false, true);
+                setcookie("COOKEMAIL", $_POST["email"], time() + COOKIE_EXPIRE, COOKIE_PATH, "", false, true);
 
                 $database->updateUserField(
                     $uid,
@@ -311,7 +311,7 @@ class Account {
         $database->UpdateOnline("sitter", $username, time(), $userData['id']);
     }
 
-    setcookie("COOKUSR", $username, time() + COOKIE_EXPIRE, COOKIE_PATH);
+    setcookie("COOKUSR", $username, time() + COOKIE_EXPIRE, COOKIE_PATH, "", false, true);
     $session->login($username);
 }
 

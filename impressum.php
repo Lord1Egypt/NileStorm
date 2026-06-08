@@ -2,7 +2,7 @@
 #################################################################################
 ##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
 ## --------------------------------------------------------------------------- ##
-##  Project:       TravianZ                        		       	       ##
+##  Project:       NileStorm                        		       	       ##
 ##  Version:       01.09.2013 						       ##
 ##  Filename       impressum.php                                               ##
 ##  Developed by:  Dzoki                                                       ##

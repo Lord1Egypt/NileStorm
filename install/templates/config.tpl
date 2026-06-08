@@ -3,7 +3,7 @@
 #################################################################################
 ##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
 ## --------------------------------------------------------------------------- ##
-##  Project:       TravianZ                                                    ##
+##  Project:       NileStorm                                                    ##
 ##  Filename       config.php                                                 ##
 ##  Developed by:  Dzoki                                                       ##
 ##  License:       TravianZ Project                                            ##
@@ -85,7 +85,7 @@ $dbPrefix = $_SESSION['install_random_prefix'];
                 <span class="f9 c6">Server name:</span>
             </td>
             <td width="140">
-                <input type="text" name="servername" id="servername" value="TravianZ">
+                <input type="text" name="servername" id="servername" value="NileStorm">
             </td>
         </tr>
         <tr>

@@ -2,7 +2,7 @@
 #################################################################################
 ## -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                              ##
 ## --------------------------------------------------------------------------- ##
-## Project:     TravianZ (Refactor incremental)                                ##
+## Project:     NileStorm (Refactor incremental)                                ##
 ## File:        alli_menu.tpl                                                  ##
 ## Description: Alliance menu navigation                                       ##
 ## Improvements:                                                               ##

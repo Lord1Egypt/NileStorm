@@ -5,7 +5,7 @@
 ##                                                                             ##
 ## --------------------------------------------------------------------------- ##
 ##                                                                             ##
-##  Project:       TravianZ                                                    ##
+##  Project:       NileStorm                                                    ##
 ##  Version:       05.03.2014                                                  ##
 ##  Filename:      Admin/admin.php     				                           ##
 ##  Developed by:  Dzoki                                                       ##

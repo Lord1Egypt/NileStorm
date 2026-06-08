@@ -3,7 +3,7 @@
 #################################################################################
 ##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
 ## --------------------------------------------------------------------------- ##
-##  Project:       TravianZ                                                    ##
+##  Project:       NileStorm                                                    ##
 ##  Filename       activate.php                                                ##
 ##  Developed by:  Dixie                                                       ##
 ##  Developed by:  Dzoki                                                       ##

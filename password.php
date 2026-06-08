@@ -3,7 +3,7 @@
 #################################################################################
 ##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
 ## --------------------------------------------------------------------------- ##
-##  Project:       TravianZ                                                    ##
+##  Project:       NileStorm                                                    ##
 ##  Filename       password.php                                                ##
 ##  Developed by:  Dixie                                                       ##
 ##  License:       TravianZ Project                                            ##
@@ -63,13 +63,15 @@ if(!isset($_REQUEST['npw'])){
 		<h5><img src="img/x.gif" class="img_u22" alt="forgotten password" /></h5>
 
 <?php
-	// user input email and submit
-	if(isset($_POST['email']) && isset($_POST['npw'])){
-		$uid = intval($_POST['npw']);
-		$email = $database->getUserField($uid, 'email', 0);
-		$username = $database->getUserField($uid, 'username', 0);
-		if($email != $_POST['email']){
-			echo "<p>Unfortunately the entered email address does not match the one used to register the account.</p>\n";
+	// user input email and submit — look up by email only, never expose UID
+	if(isset($_POST['email']) && !isset($_POST['npw_confirm'])){
+		$submittedEmail = trim($_POST['email'] ?? '');
+		$uid = $database->getUserIdByEmail($submittedEmail);
+		$email = $uid ? $database->getUserField($uid, 'email', 0) : null;
+		$username = $uid ? $database->getUserField($uid, 'username', 0) : null;
+		// Always show the same message to prevent email enumeration
+		if(!$uid || $email !== $submittedEmail){
+			echo "<p>If that email address is registered, a password reset link has been sent.</p>\n";
 		}else{
 			// generate password and cpw
 			$npw = $generator->generateRandStr(7);
@@ -80,7 +82,7 @@ if(!isset($_REQUEST['npw'])){
 			// send password mail
 			$mailer->sendPassword($email, $uid, $username, $npw, $cpw);
 
-			echo "<p>Password was sent to: ${_POST['email']}</p>\n";
+			echo "<p>If that email address is registered, a password reset link has been sent.</p>\n";
 		}
 
 	// user click the link in 'password forgotten' email
@@ -104,7 +106,6 @@ if(!isset($_REQUEST['npw'])){
 		<form action="password.php" method="post">
 			<p>
 				<b>Email</b><br />
-				<input type="hidden" name="npw" value="<?php echo intval($_GET['npw']); ?>" />
 				<input class="text" type="text" name="email" maxlength="50" />
 			</p>
 

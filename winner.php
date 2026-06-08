@@ -5,7 +5,7 @@ $start_timer = $generator->pageLoadTimeStart();
 #################################################################################
 ## -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =- 			        			##
 ## ---------------------------------------------------------------------------  ##
-## Project:     TravianZ 														##
+## Project:     NileStorm 														##
 ## Version:     18.02.2014 														##
 ## Description: When the player builds Wonder of the World      				##
 ##              to level 100 the winner details are shown.      				##
@@ -236,11 +236,11 @@ if ($winner) {
 					<center><h3 style="color:#2ecc71;">🛡️ Top Defenders</h3></center>
 					"<a href="spieler.php?uid=<?php echo $defender[0]['userid']; ?>" title="Total Villages: <?php echo $defender[0]['totalvillages']; echo "\n"; ?>Defence Points: <?php echo $defender[0]['dpall'];?>"><?php echo $defender[0]['username']; ?></a>" was greeted by the gathered, while following the procession to the top. A brilliant strategist and champion of the people, he is known throughout the world as the greatest defender ever to protect a city. Next to honor, "<a href="spieler.php?uid=<?php echo $defender[1]['userid']; ?>" title="Total Villages: <?php echo $defender[1]['totalvillages']; echo "\n"; ?>Defence Points: <?php echo $defender[1]['dpall'];?>"><?php echo $defender[1]['username']; ?></a> and "<a href="spieler.php?uid=<?php echo $defender[2]['userid']; ?>" title="Total Villages: <?php echo $defender[2]['totalvillages']; echo "\n"; ?>Defence Points: <?php echo $defender[2]['dpall'];?>"><?php echo $defender[2]['username']; ?></a>" the commanders of the second and third armies of brave defenders look proudly at the grateful crowd.
 					<p>Warriors, leaders, heroes, stood together, looking over the world they explored and conquered. Although the feast will end and people will go back to their daily lives again, this day will remain in their memory forever.</p>
-					<p>We, the TravianZ Team, thank you and we look forward to a new adventure in a new TravianZ world.</p>
+					<p>We, the NileStorm Team, thank you and we look forward to a new adventure in a new NileStorm world.</p>
 					Best Regards,
 					<?php echo SERVER_NAME; ?> Team<br />
 					 <p style="text-align:center;font-size:12px;color:#777;">
-					(By: TravianZ team v8.3.5)</p>
+					(By: NileStorm Team v8.3.5)</p>
 					</p>
 					<br /><br />
 					<div style="text-align: center"><a href="dorf1.php">&raquo; Continue</a></div>

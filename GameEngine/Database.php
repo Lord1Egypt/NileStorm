@@ -2,7 +2,7 @@
 #################################################################################
 ##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
 ## --------------------------------------------------------------------------- ##
-##  Project:       TravianZ                                                    ##
+##  Project:       NileStorm                                                    ##
 ##  Version:       22.06.2015                    			       ##
 ##  Filename       db_MYSQL.php                                                ##
 ##  Developed by:  Mr.php , Advocaite , brainiacX , yi12345 , Shadow , ronix   ##
@@ -917,6 +917,14 @@ public function getBestOasisCropBonus($x, $y) {
 		$q2 = "UPDATE " . TB_PREFIX . "users set sit2 = 0 where id = $uid and sit2 = $uid2";
 		mysqli_query($this->dblink,$q2);
 	}
+
+    function getUserIdByEmail($email) {
+        $safe = $this->escape(trim($email));
+        $q = "SELECT id FROM " . TB_PREFIX . "users WHERE email = '$safe' LIMIT 1";
+        $r = $this->query($q);
+        $row = mysqli_fetch_assoc($r);
+        return $row ? (int)$row['id'] : null;
+    }
 
     function getUserField($ref, $field, $mode, $use_cache = true) {
         // update for Multihunter's username and ID
@@ -8443,7 +8451,7 @@ References: User ID/Message ID, Mode
 	    $q = "SELECT * FROM " . TB_PREFIX . "prisoners where " . TB_PREFIX . "prisoners.from = $from";
 	    $result = mysqli_query($this->dblink,$q);
 	    
-	    self::$prisonersCacheByVillageAndFromIDs[$wid.$from] = $this->mysqli_fetch_all($result);
+	    self::$prisonersCacheByVillageAndFromIDs[$from] = $this->mysqli_fetch_all($result);
 	    return self::$prisonersCacheByVillageAndFromIDs[$from];
 	}
 

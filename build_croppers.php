@@ -10,7 +10,7 @@
  #################################################################################
 ##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
 ## --------------------------------------------------------------------------- ##
-##  Project:       TravianZ                                                    ##
+##  Project:       NileStorm                                                    ##
 ##  Filename       build_croppers.php                                          ##
 ##  Developed by:  TravianZ                                                    ##
 ##  License:       TravianZ Project                                            ##

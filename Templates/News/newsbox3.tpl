@@ -40,7 +40,7 @@
     <br /><br />
 
     <div style="text-align: center;">
-        <u><b>Released by: TravianZ Team</b></u>
+        <u><b>Released by: NileStorm Team</b></u>
     </div>
 
     <br />

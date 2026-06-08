@@ -2,7 +2,7 @@
 #################################################################################
 ## -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                              ##
 ## --------------------------------------------------------------------------- ##
-## Project:     TravianZ (Refactor incremental)                                ##
+## Project:     NileStorm (Refactor incremental)                                ##
 ## File:        attack-filtered.tpl                                            ##
 ## Description: Attack / report filtering                                      ##
 ## Improvements:                                                               ##

@@ -5,7 +5,7 @@ $start_timer = $generator->pageLoadTimeStart();
 #################################################################################
 ## -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =- 			                   ##
 ## --------------------------------------------------------------------------- ##
-## Project:     TravianZ 							                           ##
+## Project:     NileStorm 							                           ##
 ## Version:     01.06.2018 							                           ##
 ## Description: When an Admin/MH starts a maintenance                          ##
 ##              this page will be showed                                       ##

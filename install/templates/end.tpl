@@ -4,7 +4,7 @@
 #################################################################################
 ##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
 ## --------------------------------------------------------------------------- ##
-##  Project:       TravianZ                                                    ##
+##  Project:       NileStorm                                                    ##
 ##  Filename       end.php                                                     ##
 ##  Developed by:  Dzoki                                                       ##
 ##  License:       TravianZ Project                                            ##
@@ -16,7 +16,7 @@
 
 ?>
 <p>
-Thanks for installing TravianZ.
+Thanks for installing NileStorm.
 <h4>Please remove/rename the installation folder.</h4>
 All the files are placed. The database is created, so you can now start playing on your own Travian.
 </p>
@@ -41,7 +41,7 @@ rename("../install/","../installed_".$time);
 touch('../var/installed');
 ?>
 <p>
-<center><font size="4"><a href="<?php echo HOMEPAGE; ?>">> My TravianZ homepage <</font></a></center>
+<center><font size="4"><a href="<?php echo HOMEPAGE; ?>">> My NileStorm homepage <</font></a></center>
 </p>
 </br>
 <center>

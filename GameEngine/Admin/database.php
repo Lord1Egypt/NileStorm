@@ -5,7 +5,7 @@
 ##                                                                             ##
 ## --------------------------------------------------------------------------- ##
 ##                                                                             ##
-##  Project:       TravianZ                                                    ##
+##  Project:       NileStorm                                                    ##
 ##  Version:       05.03.2014                                                  ##
 ##  Filename:      GameEngine/Admin/database.php                               ##
 ##  Developed by:  Dzoki                                                       ##
@@ -82,18 +82,19 @@ class adm_DB {
 	        $bcrypted = false;
 	    }
 
-		$username = htmlspecialchars($username);
+		$safeUser = mysqli_real_escape_string($this->connection, htmlspecialchars($username));
+		$safeIP   = mysqli_real_escape_string($this->connection, $_SERVER['REMOTE_ADDR'] ?? '');
 	    if($pwOk) {
 	        // update password to bcrypt, if correct
 	        if (!$dbarray['is_bcrypt'] && !$bcrypted) {
 	            mysqli_query($this->connection, "UPDATE " . TB_PREFIX . "users SET password = '".password_hash($password, PASSWORD_BCRYPT,['cost' => 12])."'".($bcrypt_update_done ? ', is_bcrypt = 1' : '')." where id = ".(int) $dbarray['id']);
 	        }
 
-	        mysqli_query($this->connection,"Insert into ".TB_PREFIX."admin_log values (0,'X','$username logged in (IP: <b>".$_SERVER['REMOTE_ADDR']."</b>)',".time().")");
+	        mysqli_query($this->connection,"Insert into ".TB_PREFIX."admin_log values (0,'X','$safeUser logged in (IP: <b>$safeIP</b>)',".time().")");
 	        return true;
 	    }
 	    else {
-	        mysqli_query($this->connection,"Insert into ".TB_PREFIX."admin_log values (0,'X','<font color=\'red\'><b>IP: ".$_SERVER['REMOTE_ADDR']." tried to log in with username <u> $username</u> but access was denied!</font></b>',".time().")");
+	        mysqli_query($this->connection,"Insert into ".TB_PREFIX."admin_log values (0,'X','<font color=\'red\'><b>IP: $safeIP tried to log in with username <u>$safeUser</u> but access was denied!</font></b>',".time().")");
 	        return false;
 	    }
 	}

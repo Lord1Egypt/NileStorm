@@ -3,7 +3,7 @@
 #################################################################################
 ##              -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                 ##
 ## --------------------------------------------------------------------------- ##
-##  Project:       TravianZ                                                    ##
+##  Project:       NileStorm                                                    ##
 ##  Version:       30.04.2026	           			       			   		   ##
 ##  Filename       Alliance.php                                                ##
 ##  Developed by:  Dzoki							   						   ##

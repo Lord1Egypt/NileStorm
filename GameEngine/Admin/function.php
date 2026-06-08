@@ -6,7 +6,7 @@
 ##                                                                             ##
 ## --------------------------------------------------------------------------- ##
 ##                                                                             ##
-##  Project:       TravianZ                                                    ##
+##  Project:       NileStorm                                                    ##
 ##  Version:       05.03.2014                                                  ##
 ##  Filename:      GameEngine/Admin/function.php                               ##
 ##  Developed by:  Dzoki                                                       ##

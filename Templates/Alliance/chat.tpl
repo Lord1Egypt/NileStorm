@@ -2,7 +2,7 @@
 #################################################################################
 ## -= YOU MAY NOT REMOVE OR CHANGE THIS NOTICE =-                              ##
 ## --------------------------------------------------------------------------- ##
-## Project:     TravianZ (Incremental Refactor SAFE)                           ##
+## Project:     NileStorm (Incremental Refactor SAFE)                           ##
 ## File:        chat.tpl                                                       ##
 ## Description: Alliance chat (AJAX)                            			   ##
 ## Improvements:                                                               ##

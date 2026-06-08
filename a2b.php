@@ -8,7 +8,7 @@ $start_timer = $generator->pageLoadTimeStart();
 ##                                                                             ##
 ## --------------------------------------------------------------------------- ##
 ##                                                                             ##
-##  Project:       TravianZ                                                    ##
+##  Project:       NileStorm                                                    ##
 ##  Version:       29.04.2026                                                  ##
 ##  Filename:      a2b.php                                 					   ##
 ##  Developed by:  Dzoki & Advocaite & Donnchadh                               ##
