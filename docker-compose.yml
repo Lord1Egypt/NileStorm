@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: travianz-web
+    container_name: nilestorm-web
     ports:
       - "8080:80"
     volumes:
@@ -13,12 +13,12 @@ services:
     depends_on:
       - db
     networks:
-      - travianz-network
+      - nilestorm-network
     restart: unless-stopped
 
   db:
     image: mariadb:latest
-    container_name: travianz-db
+    container_name: nilestorm-db
     environment:
       MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD:-${MYSQL_ROOT_PASSWORD:-rootpassword}}
       MARIADB_DATABASE: ${MARIADB_DATABASE:-${MYSQL_DATABASE:-travian}}
@@ -30,13 +30,13 @@ services:
     ports:
       - "3306:3306"
     networks:
-      - travianz-network
+      - nilestorm-network
     restart: unless-stopped
     command: --sql_mode=""
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
-    container_name: travianz-phpmyadmin
+    container_name: nilestorm-phpmyadmin
     environment:
       PMA_HOST: db
       PMA_PORT: 3306
@@ -47,7 +47,7 @@ services:
     depends_on:
       - db
     networks:
-      - travianz-network
+      - nilestorm-network
     restart: unless-stopped
 
 volumes:
@@ -55,5 +55,5 @@ volumes:
     driver: local
 
 networks:
-  travianz-network:
+  nilestorm-network:
     driver: bridge

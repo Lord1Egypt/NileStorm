@@ -1,156 +1,216 @@
-# TravianZ
+# NileStorm
 
-[![Maintenance](https://img.shields.io/maintenance/yes/2025.svg)](https://github.com/Shadowss/TravianZ)
-[![GitHub Release](https://img.shields.io/github/release/Shadowss/TravianZ/all.svg)](https://github.com/Shadowss/TravianZ)
-[![GitHub contributors](https://img.shields.io/github/contributors/Shadowss/TravianZ.svg)](https://github.com/Shadowss/TravianZ)
-[![license](https://img.shields.io/github/license/Shadowss/TravianZ.svg)](https://github.com/Shadowss/TravianZ)
+[![PHP](https://img.shields.io/badge/PHP-8.3%2B-777BB4?logo=php&logoColor=white)](https://php.net)
+[![MariaDB](https://img.shields.io/badge/MariaDB-latest-003545?logo=mariadb&logoColor=white)](https://mariadb.org)
+[![Docker](https://img.shields.io/badge/Docker-ready-2496ED?logo=docker&logoColor=white)](https://docker.com)
+[![License](https://img.shields.io/badge/License-CC%20BY--NC--SA%203.0-lightgrey)](LICENSE)
+[![Version](https://img.shields.io/badge/Version-v8.3.5-success)]()
 
-TravianZ is an open-source browser strategy game inspired by classic Travian-like gameplay.
+**NileStorm** is a fully-featured, self-hosted browser strategy game server — inspired by classic Travian gameplay. Build villages, raise armies, forge alliances, and conquer the map.
 
-This repository currently targets modern local/server setups with PHP 8.x and MariaDB.
+Built on **PHP 8.3 + MariaDB**, containerized with **Docker**, and ready to run in minutes.
 
-## Project Status
+---
 
-- Version line: `v8.3.5` (legacy naming)
-- Stability: playable and actively maintained
-- Migration note: this is not a drop-in upgrade over older `8.3.2` deployments
+## Features
 
-If you are upgrading from an older installation, do a fresh install and migrate data carefully.
+- **Village management** — Build and upgrade resources, warehouses, barracks, and more across multiple village types
+- **Military system** — Train troops, send attacks, reinforcements, and raids with full battle calculation
+- **Alliance system** — Create or join alliances, manage diplomacy, declare wars
+- **Marketplace** — Trade resources between villages and players
+- **Artifacts** — Server-wide unique items that grant powerful bonuses
+- **Rankings** — Live leaderboards by population, attack, defense, and more
+- **Admin panel** — Full server control: manage players, villages, reports, and server settings
+- **2× speed server** — Pre-configured for faster-paced gameplay
+- **Docker-first** — One command to get the full stack running
+- **PHP 8.3 compatible** — Modern runtime, hardened and warning-free
 
-## Quick Start (Docker)
+---
+
+## Quick Start
 
 ```bash
-git clone https://github.com/Shadowss/TravianZ.git
-cd TravianZ
+git clone https://github.com/Lord1Egypt/NileStorm.git
+cd NileStorm
 cp .env.example .env
 docker compose up -d
 ```
 
-Then open:
+Then open **http://localhost:8080/install** and follow the installer.
 
-- `http://localhost:8080/install`
+> After installation completes, the game is live at **http://localhost:8080**
 
-Detailed container guide: [DOCKER_README.md](DOCKER_README.md)
+---
 
-## System Requirements
+## Services
 
-Recommended:
+| Service | URL | Description |
+|---|---|---|
+| Game | http://localhost:8080 | Main game interface |
+| Installer | http://localhost:8080/install | First-time setup wizard |
+| Admin panel | http://localhost:8080/Admin/admin.php | Server administration |
+| phpMyAdmin | http://localhost:8081 | Database management |
 
-- PHP `8.3+`
-- MariaDB `latest stable` (or MySQL-compatible server)
-- Apache or Nginx with PHP support
-- Linux server with enough CPU/RAM for your expected player count
+---
 
-Notes:
+## Requirements
 
-- The game is query-heavy by design (legacy architecture), so shared hosting can become a bottleneck quickly.
-- For medium/large servers, prefer dedicated or well-sized VPS infrastructure.
+| Requirement | Minimum |
+|---|---|
+| PHP | 8.3+ |
+| Database | MariaDB latest (or MySQL-compatible) |
+| Web server | Apache 2.4 / Nginx |
+| RAM | 2 GB |
+| Disk | 5 GB |
 
-## Installation (Web Installer)
+> **Recommended:** Run via Docker — the included `docker-compose.yml` handles all dependencies automatically.
 
-1. Start services (Docker) or prepare your web+DB stack.
-2. Open `http://your-host/install`.
-3. Fill database settings:
-  - Host: `db` (Docker) or your DB host
-  - Port: usually `3306`
-  - DB/User/Password from your environment
-4. Complete installer steps:
-  - DB structure
-  - World data
-  - Croppers build
-5. After success, access the game root.
+---
 
-## Environment Configuration
+## Installation
 
-Use `.env` (copy from `.env.example`) to manage deployment values.
+### Option A — Docker (recommended)
 
-Main keys:
+```bash
+# 1. Clone the repo
+git clone https://github.com/Lord1Egypt/NileStorm.git
+cd NileStorm
 
-- `MARIADB_ROOT_PASSWORD`
-- `MARIADB_DATABASE`
-- `MARIADB_USER`
-- `MARIADB_PASSWORD`
-- `DB_HOST`
-- `DB_PORT`
+# 2. Configure environment
+cp .env.example .env
+# Edit .env to set your own passwords (optional for local use)
 
-Legacy compatibility keys (`MYSQL_*`) are still supported and can inherit MariaDB values.
+# 3. Start all services
+docker compose up -d
 
-## Admin Panel
+# 4. Run the web installer
+# Open http://localhost:8080/install in your browser
+# Use DB host: db, port: 3306, credentials from your .env
+```
 
-Admin entrypoint:
+### Option B — Manual (Apache + PHP)
 
-- `http://your-host/Admin/admin.php`
+1. Place files in your web server document root
+2. Create a MariaDB database and user
+3. Copy `.env.example` → `.env` and fill in your DB credentials
+4. Open `http://your-host/install` and complete the installer
+5. Ensure the web server user can write to `var/` and `GameEngine/`
 
-Recent improvements include:
+---
 
-- Users list under the `Users` menu
-- Better null/undefined handling in admin templates
-- Dynamic table prefix support in map tile queries
+## Configuration
 
-## Performance Notes
+After installation, `GameEngine/config.php` is auto-generated by the installer. Key settings you may want to adjust:
 
-For large worlds (for example `400x400`), generation tasks can be expensive.
+```php
+// Server identity
+define("SERVER_NAME", "NileStorm");
+define("SPEED", "2");          // Game speed multiplier
+define("WORLD_MAX", "200");    // Map size (200×200)
+define("INCREASE_SPEED", "3"); // Troop speed multiplier
+define("PROTECTION", "43200"); // Beginner protection in seconds (12h)
 
-Recent optimizations include:
+// Admin contact
+define("ADMIN_EMAIL", "your@email.com");
+define("ADMIN_NAME", "Admin");
 
-- world data generation tuning for bulk operations
-- croppers generation batching and progress streaming
-- safer DB/session handling during installer workflows
+// PayPal (optional — for Plus packages)
+define("PAYPAL_EMAIL", "your@email.com");
+```
 
-For production-like loads, monitor:
+> `GameEngine/config.php` and `.env` are gitignored and never committed.
 
-- DB CPU and slow queries
-- PHP-FPM/Apache worker limits
-- disk I/O during installer and reset operations
+---
+
+## Docker Commands
+
+```bash
+# Start all containers
+docker compose up -d
+
+# View logs
+docker compose logs -f web
+
+# Stop everything
+docker compose down
+
+# Full reset (drops DB data)
+docker compose down -v
+
+# Rebuild after code changes
+docker compose up -d --build
+```
+
+---
+
+## Resetting the Server
+
+To start a fresh game world:
+
+1. `docker compose down -v` — removes database volume
+2. Delete `var/installed` (or the `installed_*` marker)
+3. Delete `GameEngine/config.php`
+4. `docker compose up -d`
+5. Re-run the installer at `/install`
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Language | PHP 8.3 |
+| Database | MariaDB (latest) |
+| Web server | Apache 2.4 with mod_rewrite |
+| Containerization | Docker + Docker Compose |
+| Frontend | JavaScript (MooTools), HTML/CSS |
+| Architecture | Legacy monolith + modern PSR-4 namespace layer (`src/`) |
+
+---
+
+## Project Structure
+
+```
+NileStorm/
+├── GameEngine/        # Core game logic (config, database, automation, battle)
+├── Templates/         # Game UI templates
+├── Admin/             # Admin panel
+├── src/               # Modern PSR-4 PHP classes (Database, Entity, Utils)
+├── Security/          # Security layer
+├── gpack/             # Graphics packs
+├── install/           # Web installer
+├── var/               # Runtime files (logs, DB init scripts)
+├── Dockerfile         # PHP 8.3-Apache image
+├── docker-compose.yml # Full stack (web + MariaDB + phpMyAdmin)
+└── .env.example       # Environment template
+```
+
+---
 
 ## Troubleshooting
 
-Common checks:
+**Installer can't connect to database**
+- In Docker, DB host must be `db` (not `localhost`)
+- Verify `.env` credentials match your MariaDB settings
 
-1. If installer cannot connect to DB:
-  - verify `DB_HOST`, port, user and password
-  - in Docker, host should be `db`, not `localhost`
-2. If permissions fail during install:
-  - ensure web user can write required runtime files/folders
-3. If pages show warnings after PHP upgrade:
-  - ensure latest code is deployed
-  - clear opcode/cache and retry
+**Permission errors during install**
+- `chmod -R 755 var/ GameEngine/` to allow the web user to write
 
-For container-specific troubleshooting, see [DOCKER_README.md](DOCKER_README.md).
+**Blank page or PHP warnings**
+- `docker compose logs -f web` to inspect errors
+- Ensure PHP 8.3 is running: `docker compose exec web php -v`
 
-## Development
+**Pages look broken after restart**
+- Clear browser cache — some assets are cached aggressively
 
-Useful commands:
-
-```bash
-# Start stack
-docker compose up -d
-
-# Logs
-docker compose logs -f web
-
-# Validate PHP files
-find . -name '*.php' -not -path './var/*' -print0 | xargs -0 -n1 php -l
-```
-
-Repository references:
-
-- Change history: [CHANGELOG.md](CHANGELOG.md)
-- Contribution guide: [CONTRIBUTING.md](CONTRIBUTING.md)
-- Code of conduct: [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
-
-## Community and Support
-
-- Issues: https://github.com/Shadowss/TravianZ/issues
-- Wiki: https://github.com/Shadowss/TravianZ/wiki
-- Chat: https://gitter.im/TravianZ-V8/Lobby
-
-## Credits
-
-Thanks to the original and current maintainers, contributors, testers, and the TravianZ community.
-
-Special acknowledgement to all legacy authors and maintainers who kept this project alive through multiple iterations.
+---
 
 ## License
 
-This project is licensed under the terms described in [LICENSE](LICENSE).
+This project is licensed under [Creative Commons Attribution-NonCommercial-ShareAlike 3.0](LICENSE).
+
+Based on the open-source [TravianZ](https://github.com/Shadowss/TravianZ) project.
+
+---
+
+> Built and maintained by [Lord1Egypt](https://github.com/Lord1Egypt)
