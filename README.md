@@ -2,7 +2,8 @@
 
 [![PHP](https://img.shields.io/badge/PHP-8.3%2B-777BB4?logo=php&logoColor=white)](https://php.net)
 [![MariaDB](https://img.shields.io/badge/MariaDB-latest-003545?logo=mariadb&logoColor=white)](https://mariadb.org)
-[![Docker](https://img.shields.io/badge/Docker-ready-2496ED?logo=docker&logoColor=white)](https://docker.com)
+[![Docker](https://img.shields.io/badge/Docker-ready-2496ED?logo=docker&logoColor=white)](https://hub.docker.com/r/lord1egypt/nilestorm)
+[![Docker Pulls](https://img.shields.io/docker/pulls/lord1egypt/nilestorm)](https://hub.docker.com/r/lord1egypt/nilestorm)
 [![License](https://img.shields.io/badge/License-CC%20BY--NC--SA%203.0-lightgrey)](LICENSE)
 [![Version](https://img.shields.io/badge/Version-v8.3.5-success)]()
 
@@ -27,7 +28,31 @@ Built on **PHP 8.3 + MariaDB**, containerized with **Docker**, and ready to run 
 
 ---
 
+## Docker Hub
+
+```bash
+docker pull lord1egypt/nilestorm:latest
+```
+
+Available tags:
+- `lord1egypt/nilestorm:latest` — latest stable build
+- `lord1egypt/nilestorm:v8.3.5` — pinned release
+
+---
+
 ## Quick Start
+
+### Option A — Docker Hub (no clone needed)
+
+```bash
+curl -O https://raw.githubusercontent.com/Lord1Egypt/NileStorm/master/docker-compose.yml
+curl -O https://raw.githubusercontent.com/Lord1Egypt/NileStorm/master/.env.example
+cp .env.example .env
+# Edit docker-compose.yml: replace "build: ." with "image: lord1egypt/nilestorm:latest"
+docker compose up -d
+```
+
+### Option B — Clone and build locally
 
 ```bash
 git clone https://github.com/Lord1Egypt/NileStorm.git
