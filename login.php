@@ -210,13 +210,7 @@ echo "<p class=\"error_box\">
 	<a href=\"password.php?npw=".$database->getUserField($form->getValue('user'), 'id', 1)."\">".PW_GENERATE."</a>
 </p>";
 }
-if($form->getError("activate") != "") {
-	echo "<p class=\"error_box\">
-	<span class=\"error\">".EMAIL_NOT_VERIFIED."</span><br>
-	".EMAIL_FOLLOW."<br>
-	<a href=\"activate.php?usr=".$form->getError("activate")."\">".VERIFY_EMAIL."</a>
-	</p>";
-}
+
 if($form->getError("vacation") != "") {
 echo "<p class=\"error_box\">
 <span class=\"error\">".$form->getError("vacation")."</span></p>";
