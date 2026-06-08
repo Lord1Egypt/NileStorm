@@ -23,6 +23,9 @@ if(!file_exists('var/installed') && @opendir('install')) {
 include('GameEngine/Account.php');
 AccessLogger::logRequest();
 
+$csrfToken = bin2hex(random_bytes(16));
+$_SESSION['csrf'] = $csrfToken;
+
 $invited=(isset($_GET['uid'])) ? filter_var($_GET['uid'], FILTER_SANITIZE_NUMBER_INT):$form->getError('invt');
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -63,6 +66,7 @@ if(REG_OPEN == true){ ?>
 <form name="snd" method="post" action="anmelden.php">
 <input type="hidden" name="invited" value="<?php echo $invited; ?>" />
 <input type="hidden" name="ft" value="a1" />
+<input type="hidden" name="csrf" value="<?php echo htmlspecialchars($csrfToken); ?>" />
 
 <table cellpadding="1" cellspacing="1" id="sign_input">
 	<tbody>

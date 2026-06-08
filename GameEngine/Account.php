@@ -36,6 +36,10 @@ class Account {
 	function __construct() {
 		global $session;
 		if(isset($_POST['ft'])) {
+            if (!isset($_SESSION['csrf']) || !hash_equals($_SESSION['csrf'], $_POST['csrf'] ?? '')) {
+                header('Location: login.php');
+                exit;
+            }
 			switch($_POST['ft']) {
 				case "a1":
 				$this->Signup();
@@ -161,8 +165,8 @@ class Account {
             );
 
             if ($uid) {
-                setcookie("COOKUSR",   $_POST["name"],  time() + COOKIE_EXPIRE, COOKIE_PATH, "", false, true);
-                setcookie("COOKEMAIL", $_POST["email"], time() + COOKIE_EXPIRE, COOKIE_PATH, "", false, true);
+                setcookie("COOKUSR",   $_POST["name"],  ['expires' => time() + COOKIE_EXPIRE, 'path' => COOKIE_PATH, 'httponly' => true, 'samesite' => 'Lax']);
+                setcookie("COOKEMAIL", $_POST["email"], ['expires' => time() + COOKIE_EXPIRE, 'path' => COOKIE_PATH, 'httponly' => true, 'samesite' => 'Lax']);
 
                 $database->updateUserField(
                     $uid,
@@ -276,13 +280,8 @@ class Account {
         $form->addError("pw", LOGIN_PASS_EMPTY);
     } elseif (!User::exists($database, $username) ||
               (!$database->login($username, $password) && !$database->sitterLogin($username, $password))) {
-        // Generic error whether username is wrong or password is wrong — no enumeration possible
-        $activateData = $database->getActivateField($username, 'act', 1);
-        if (!empty($activateData)) {
-            $form->addError("activate", $username);
-        } else {
-            $form->addError("pw", LOGIN_PW_ERROR);
-        }
+        // Generic error regardless of reason — no enumeration possible
+        $form->addError("pw", LOGIN_PW_ERROR);
     }
 
     // Obținem datele utilizatorului (după validări - exact ca în original)
@@ -311,7 +310,7 @@ class Account {
         $database->UpdateOnline("sitter", $username, time(), $userData['id']);
     }
 
-    setcookie("COOKUSR", $username, time() + COOKIE_EXPIRE, COOKIE_PATH, "", false, true);
+    setcookie("COOKUSR", $username, ['expires' => time() + COOKIE_EXPIRE, 'path' => COOKIE_PATH, 'httponly' => true, 'samesite' => 'Lax']);
     $session->login($username);
 }
 

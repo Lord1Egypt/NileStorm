@@ -25,17 +25,18 @@ The email will be sent to following address: <span class="important"><?php echo 
             </p> 
             <p>In order to activate your account enter the code or click on the link in your email.</p> 
             <div id="activation"> 
-                <form action="activate.php" method="post"> 
-                    <p class="important"> 
-                        Activation code: 
-                    </p> 
-                    <input class="text" type="text" name="id" maxlength="10" /> 
-                    <p> 
-                        <input type="image" value="ok" name="s1" src="img/x.gif" id="btn_send" class="dynamic_img" alt="send"/> 
-                        <input type="hidden" name="ft" value="a2" /> 
-                    </p> 
-                </form> 
-                </div> 
+                <form action="activate.php" method="post">
+                    <p class="important">
+                        Activation code:
+                    </p>
+                    <input class="text" type="text" name="id" maxlength="10" />
+                    <p>
+                        <input type="image" value="ok" name="s1" src="img/x.gif" id="btn_send" class="dynamic_img" alt="send"/>
+                        <input type="hidden" name="ft" value="a2" />
+                        <input type="hidden" name="csrf" value="<?php echo htmlspecialchars($csrfToken); ?>" />
+                    </p>
+                </form>
+                </div>
                 <div id="no_mail"> 
                 <p> 
                     <a href="activate.php?id=<?php echo $_GET['id']; ?>&amp;c=<?php echo $generator->encodeStr($email,5); ?>"><span class="important">No email received?</span></a>
@@ -190,16 +191,16 @@ CountBack(gsecs);
 <?php       
 }else{ ?> 
             <div id="activation"> 
-                <form action="activate.php" method="post"> 
-                    <p class="important"> 
-                        Activation code: 
-                    </p> 
-                    <input class="text" type="text" name="id" maxlength="10" /> 
-                    <p> 
-                        <input type="image" value="ok" name="s1" src="img/x.gif" id="btn_send" class="dynamic_img" alt="send"/> 
-                        <input type="hidden" name="ft" value="a2" /> 
-                    </p> 
-                     
+                <form action="activate.php" method="post">
+                    <p class="important">
+                        Activation code:
+                    </p>
+                    <input class="text" type="text" name="id" maxlength="10" />
+                    <p>
+                        <input type="image" value="ok" name="s1" src="img/x.gif" id="btn_send" class="dynamic_img" alt="send"/>
+                        <input type="hidden" name="ft" value="a2" />
+                        <input type="hidden" name="csrf" value="<?php echo htmlspecialchars($csrfToken); ?>" />
+                    </p>
                 </form> <?php } ?> 
                 </div> 
             </div> 

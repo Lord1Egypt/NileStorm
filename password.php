@@ -29,6 +29,15 @@ if(!isset($_REQUEST['npw'])){
 	header("Location: login.php");
 	exit;
 }
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'])) {
+    if (!isset($_SESSION['csrf']) || !hash_equals($_SESSION['csrf'], $_POST['csrf'] ?? '')) {
+        header('Location: login.php');
+        exit;
+    }
+}
+$csrfToken = bin2hex(random_bytes(16));
+$_SESSION['csrf'] = $csrfToken;
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -104,6 +113,7 @@ if(!isset($_REQUEST['npw'])){
 		<p>Before you can request a new password you have to enter the email address that has been used to register the account.
 <br /><br />Afterwards you will receive an e-mail with a new password. The password will only work after confirming it, though.</p>
 		<form action="password.php" method="post">
+			<input type="hidden" name="csrf" value="<?php echo htmlspecialchars($csrfToken); ?>" />
 			<p>
 				<b>Email</b><br />
 				<input class="text" type="text" name="email" maxlength="50" />

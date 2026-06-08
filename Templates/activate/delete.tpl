@@ -15,8 +15,9 @@
 <br /><br />You can undo the registration and re-register with a <u>different email address</u>. 
 Then the activation code will be send again</div>				
 		<form action="activate.php" method="POST">
-		<input type="hidden" name="id" value="<?php echo $_GET['id']; ?>" />
+		<input type="hidden" name="id" value="<?php echo htmlspecialchars($_GET['id'] ?? ''); ?>" />
 		<input type="hidden" name="ft" value="a3" />
+		<input type="hidden" name="csrf" value="<?php echo htmlspecialchars($csrfToken); ?>" />
 		<table cellpadding="1" cellspacing="1">
 			<tr class="top">
 				<th>Nickname</th>

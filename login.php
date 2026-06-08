@@ -32,12 +32,8 @@ if(!isset($_COOKIE['COOKUSR'])) {
 	$_COOKIE['COOKUSR'] = "";
 }
 
-if ( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' ) {
-    if ( !isset( $_SESSION[ 'csrf' ] ) || $_SESSION[ 'csrf' ] !== $_POST[ 'csrf' ] )
-        throw new RuntimeException( 'CSRF attack' );
-}
-$key                = sha1( microtime() );
-$_SESSION[ 'csrf' ] = $key;
+$csrfToken = bin2hex(random_bytes(16));
+$_SESSION['csrf'] = $csrfToken;
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -161,6 +157,7 @@ CountBack(gsecs);
 }else{ ?>
 <form method="post" name="snd" action="login.php">
 <input type="hidden" name="ft" value="a4" />
+<input type="hidden" name="csrf" value="<?php echo htmlspecialchars($csrfToken); ?>" />
 <script type="text/javascript">
 Element.implement({
 	 //imgid: if an arrow belongs to the link this can be "opened"
